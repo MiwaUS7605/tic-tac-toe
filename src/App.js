@@ -39,7 +39,7 @@ function App() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = `Move #${move}: ${trace[move+1]}`;
+      description = `Move #${move}: ${trace[move-1]}`;
     } else {
       description = 'Game start';
     }
@@ -48,7 +48,7 @@ function App() {
         {move !== currentMove ?
           <button onClick={() => jumpTo(move)}>{description}</button>
           :
-          move > 0 ? <span>You are at move #{move}: {trace[move+1]}</span> : <span>You are at game start</span>
+          move > 0 ? <span>You are at move #{move}: {trace[move-1]}</span> : <span>You are at game start</span>
 
         }
       </li>
