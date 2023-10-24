@@ -1,7 +1,7 @@
 import React from 'react';
 import Square from './Square';
 
-const Board = ({ xIsNext, squares, onPlay, isBoardFull, trace }) => {
+const Board = ({ xIsNext, squares, traces, currentMove, onPlay, isBoardFull }) => {
 
     function handleClick(index) {
         if (squares[index] || calculateWinner(squares)) { return; }
@@ -11,7 +11,7 @@ const Board = ({ xIsNext, squares, onPlay, isBoardFull, trace }) => {
         } else {
             nextSquares[index] = "O";
         }
-        trace.push(`${nextSquares[index]} at (${Math.floor(index/3)},${index%3})`)
+        traces[currentMove] = `${nextSquares[index]} at (${Math.floor((index)/3)},${(index)%3})`;
         onPlay(nextSquares);
     }
 
@@ -54,7 +54,7 @@ const Board = ({ xIsNext, squares, onPlay, isBoardFull, trace }) => {
             <div className="status">{status}</div>
             {
                 [0, 1, 2].map((row) => {
-                    return (
+                    return (    
                         <div className="board-row" key={row}>
                             {[0, 1, 2].map(col => (
                                 <Square
